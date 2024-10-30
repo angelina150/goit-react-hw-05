@@ -30,8 +30,13 @@ const MoviesPage = () => {
     fetchMovie();
   }, [movieName]);
 
-  const handleSubmit = (value) => {
-    setSearchParams({ query: value });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const queryValue = form.elements.query.value.trim();
+    if (queryValue) {
+      setSearchParams({ query: queryValue });
+    }
   };
 
   return (
@@ -47,7 +52,7 @@ const MoviesPage = () => {
       </form>
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
-      <MovieList movies={movies} />
+      {movies.length > 1 && <MovieList movies={movies} />}
     </div>
   );
 };

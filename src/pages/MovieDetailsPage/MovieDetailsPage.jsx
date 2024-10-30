@@ -12,7 +12,6 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const backLink = useRef(location.state?.from || "/movies");
-  console.log(backLink);
 
   useEffect(() => {
     getMovieById(movieId).then(setMovie);
