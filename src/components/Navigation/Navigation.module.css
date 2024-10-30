@@ -1,0 +1,13 @@
+.link {
+  color: black;
+}
+.link:hover {
+}
+.active {
+  color: red;
+}
+.nav {
+  padding: 10px;
+  display: inline-flex;
+  gap: 20px;
+}
