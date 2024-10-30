@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { getMovieById, IMAGE_BASE_URL } from "../../api/movies";
@@ -11,6 +11,8 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
+  const backLink = useRef(location.state?.from || "/movies");
+  console.log(backLink);
 
   useEffect(() => {
     getMovieById(movieId).then(setMovie);
@@ -21,11 +23,10 @@ const MovieDetailsPage = () => {
   const imageUrl = movie.poster_path
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
     : defaultImg;
-  const backLinkHref = location.state.from ?? "/movies";
 
   return (
     <div className={css.wrapper}>
-      <Link className={css.goBack} to={backLinkHref}>
+      <Link className={css.goBack} to={backLink.current}>
         Go back{" "}
       </Link>
       <div className={css.info}>
